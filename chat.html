@@ -26,6 +26,83 @@
   <footer>
     <p>&copy; 2025 Code Buddy. All rights reserved.</p>
   </footer>
-  <script src="script.js"></script>
-</body>
+  <!-- <script src="script.js"></script> -->
+b
+  
+      <script>
+    const API_KEY = 'YOUR_OPENAI_API_KEY';
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Redirect to subscribe page if user has not paid
+      if (localStorage.getItem('paid') !== 'true') {
+        window.location.href = 'subscribe.html';
+        return;
+      }
+
+      const messagesEl = document.getElementById('messages');
+      const userInput = document.getElementById('userInput');
+      const sendBtn = document.getElementById('sendBtn');
+
+      function appendMessage(sender, text) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = sender === 'user' ? 'user-message' : 'ai-message';
+        msgDiv.textContent = text;
+        messagesEl.appendChild(msgDiv);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      async function sendMessage() {
+        const question = userInput.value.trim();
+        if (!question) return;
+        appendMessage('user', question);
+        userInput.value = '';
+
+        // Show an error if API key is not configured
+        if (!API_KEY || API_KEY === 'YOUR_OPENAI_API_KEY') {
+          appendMessage('ai', 'Error: The AI service is not configured. Please provide your OpenAI API key in script.js.');
+          return;
+        }
+
+        // Display placeholder while waiting for response
+        appendMessage('ai', 'Thinking...');
+        try {
+          const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${API_KEY}`
+            },
+            body: JSON.stringify({
+              model: 'gpt-4o',
+              messages: [
+                { role: 'system', content: 'You are a helpful coding assistant.' },
+                { role: 'user', content: question }
+              ]
+            })
+          });
+
+          const data = await response.json();
+
+          // Update last message with the AI's response
+          if (data.choices && data.choices.length > 0) {
+            messagesEl.lastChild.textContent = data.choices[0].message.content.trim();
+          } else {
+            messagesEl.lastChild.textContent = 'Error: Unexpected response format.';
+          }
+        } catch (error) {
+          // Show error message in chat
+          messagesEl.lastChild.textContent = 'Error: ' + error.message;
+        }
+      }
+
+      // Event listeners for send button and Enter key
+      sendBtn.addEventListener('click', sendMessage);
+      userInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+          sendMessage();
+        }
+      });
+    });
+    </script>
+dy>
 </html>
