@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe - AI Code Assistant</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function subscribe() {
+            // Placeholder for subscription logic
+            localStorage.setItem('paid', 'true');
+            alert('Subscription successful! You now have access to the chat.');
+            window.location.href = 'chat.html';
+        }
+    </script>
+</head>
+<body>
+    <header><h1>Subscribe</h1></header>
+    <main>
+        <div class="chat-container">
+            <p>To use our AI code assistant, please subscribe. A monthly subscription grants you unlimited access to the chatbot.</p>
+            <button onclick="subscribe()">Subscribe Now</button>
+        </div>
+    </main>
+    <footer><p>&copy; 2025 ThePhoneDoc. All rights reserved.</p></footer>
+</body>
+</html>
