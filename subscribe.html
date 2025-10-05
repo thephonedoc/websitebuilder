@@ -3,25 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subscribe - AI Code Assistant</title>
+    <title>Subscribe – Code Buddy</title>
     <link rel="stylesheet" href="style.css">
     <script>
         function subscribe() {
-            // Placeholder for subscription logic
+            // Here you would integrate with a real payment system
             localStorage.setItem('paid', 'true');
-            alert('Subscription successful! You now have access to the chat.');
+            alert('Subscription successful! You now have full access to Code Buddy.');
             window.location.href = 'chat.html';
         }
     </script>
 </head>
 <body>
-    <header><h1>Subscribe</h1></header>
+    <header>
+        <h1>Subscribe to Code Buddy</h1>
+        <p class="tagline">Unlock unlimited access to your coding companion</p>
+    </header>
     <main>
-        <div class="chat-container">
-            <p>To use our AI code assistant, please subscribe. A monthly subscription grants you unlimited access to the chatbot.</p>
-            <button onclick="subscribe()">Subscribe Now</button>
-        </div>
+        <section class="hero">
+            <p>Become a subscriber to get unlimited help writing and debugging your website code. Cancel anytime.</p>
+            <button class="cta" onclick="subscribe()">Subscribe Now</button>
+            <p><a href="index.html">Back to Home</a></p>
+        </section>
     </main>
-    <footer><p>&copy; 2025 ThePhoneDoc. All rights reserved.</p></footer>
+    <footer>
+        <p>&copy; 2025 ThePhoneDoc. All rights reserved.</p>
+    </footer>
 </body>
 </html>
